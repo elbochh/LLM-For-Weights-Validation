@@ -49,6 +49,17 @@ Large Language Models (LLMs) extract narrative insights from corporate filings a
 
 Together, they form a hybrid decision system that enhances portfolio robustness, transparency, and forward-looking adaptability — combining the precision of data with the intuition of context.
 
+#Core Modules
+calculate_position_changes.py: Calculate weight transitions between months
+map_filings_to_transitions.py: Link companies to their filings
+merge_sector_and_financials.py: Merge financial characteristics
+pair_stocks.py: Pair stocks by financial similarity
+filing_retriever.py: Retrieve management discussion text
+macro_loader.py: Load macro economic reports
+rag_scorer.py: RAG-based scoring using Mistral LLM
+mgmt_summarizer.py: Summarize management discussion text
+process_pairs.py: Full pipeline for processing pairs
+
 # Dependencies
 
 ### Python Packages
@@ -76,7 +87,26 @@ python run_pipeline_us_yearly.pyThis will:
 
 ### Option 2: Run Individual Steps
 
-#### Step 1: Calculate Position Changesh
-python calculate_position_changes.py**Input**: `Weights/` directory with `weights_YYYY-MM.csv` files  
-**Output**: `Position_Changes/` directory with `transitions_YYYY-MM_to_YYYY-MM+1.csv` files
+## Step 1: Calculate Position Changesh
+python calculate_position_changes.py**Input**: `Weights/` directory  
+**Output**: `Position_Changes/` directory
+
+---
+
+## Step 2: Map Filings to Transitions
+python map_filings_to_transitions.py**Input**: `Position_Changes/` directory  
+**Output**: `Position_Changes_With_Links/` directory
+
+---
+
+## Step 3: Merge Financial Data
+python merge_sector_and_financials.py**Input**: `Position_Changes_With_Links/` directory  
+**Output**: `Position_Changes_With_Links/` directory (enhanced)
+
+---
+
+## Step 4: Process Pairs & Generate Recommendations
+python process_pairs.py**Input**: `Position_Changes_With_Links/` directory  
+**Output**: `pair_recommendations/` directory
+
 
